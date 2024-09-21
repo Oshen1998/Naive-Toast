@@ -7,17 +7,29 @@
 
 import React, {useCallback} from 'react';
 import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import showCustomBottomSheet from './CustomBottomSheet';
 import ToastModule from './ToastModule';
 
 function App(): React.JSX.Element {
-  const onHandlePress = useCallback(() => {
+  const onHandleBottomSheet = useCallback(() => {
+    showCustomBottomSheet();
+  }, []);
+
+  const onHandleToast = useCallback(() => {
     ToastModule.show('Hello, Toast!', ToastModule.SHORT);
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={onHandlePress} style={styles.btn}>
-        <Text>Press Me</Text>
+      <TouchableOpacity
+        onPress={onHandleBottomSheet}
+        style={[styles.btn, {backgroundColor: 'cyan'}]}>
+        <Text>BottomSheet</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={onHandleToast}
+        style={[styles.btn, {backgroundColor: 'lightgreen'}]}>
+        <Text>Toast</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -34,9 +46,9 @@ const styles = StyleSheet.create({
     width: '100%',
     marginHorizontal: 10,
     alignItems: 'center',
-    backgroundColor: 'cyan',
     padding: 15,
     borderRadius: 12,
+    marginVertical: 10,
   },
 });
 
